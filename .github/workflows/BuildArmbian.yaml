@@ -309,7 +309,7 @@ jobs:
           cd build/
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
-            BOARD=rk3318-box \
+            BOARD=panther-x2 \
             BRANCH=current \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
