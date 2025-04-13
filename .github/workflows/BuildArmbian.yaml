@@ -327,27 +327,13 @@ jobs:
 
           echo "status=success" >> $GITHUB_OUTPUT
 
-      # 上传编译产物
-      #- name: Upload artifact
-      # uses: actions/upload-artifact@v4.6.2
-      # if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
-      # with:
-      #   name: compile
-      #   path: ${{ github.workspace }}/build/output/images/*.tar
-      
-      #注意：以下部分需要补充 `create_release` 步骤
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
+      # 上传编译产物          
+       - name: Upload artifact
+        uses: actions/upload-artifact@v4.6.2
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
-          tag_name: ${{ inputs.set_release }}
+          name: compile
           path: ${{ github.workspace }}/build/output/images/*.tar
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release_name: Release ${{ inputs.set_release }}
-          body: "Automated release for Armbian build."
-          draft: false
-          prerelease: false
 
       # 上传到 GitHub Releases
       # - name: Upload Release Asset
