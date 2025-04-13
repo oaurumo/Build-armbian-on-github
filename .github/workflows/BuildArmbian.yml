@@ -317,7 +317,7 @@ jobs:
           artifacts: build/output/images/*
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
-            body: |
+          
             ### Armbian Image information
             - Default username: root
             - Default password: 1234
