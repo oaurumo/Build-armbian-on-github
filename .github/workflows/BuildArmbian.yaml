@@ -316,7 +316,7 @@ jobs:
             HOST=armbian \
             BUILD_DESKTOP=no \
             EXPERT=yes \
-            KERNEL_CONFIGURE=yes \
+            KERNEL_CONFIGURE=no \
             COMPRESS_OUTPUTIMAGE="sha,img.xz" \
             KERNEL_GIT=shallow \
             SHARE_LOG=yes
