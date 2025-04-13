@@ -327,8 +327,8 @@ jobs:
 
           echo "status=success" >> $GITHUB_OUTPUT
 
-      # 上传编译产物          
-       - name: Upload artifact
+      # 上传编译产物         
+      - name: Upload artifact
         uses: actions/upload-artifact@v4.6.2
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
