@@ -318,7 +318,6 @@ jobs:
             EXPERT=yes \
             KERNEL_CONFIGURE=no \
             COMPRESS_OUTPUTIMAGE="sha" \
-            KERNEL_GIT=shallow \
             SHARE_LOG=yes
 
           cd output/images/
