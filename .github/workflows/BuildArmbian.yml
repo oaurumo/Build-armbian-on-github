@@ -316,7 +316,7 @@ jobs:
         if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
         with:
           upload_url: ${{ build/output/images/* }}
-          asset_path: ./release/my_binary.tar.gz
+          asset_path: https://codeload.github.com/oaurumo/myarmbian/zip/refs/tags/v1.0.0
           asset_name: my_binary-${{ env.RELEASE_VERSION }}.tar.gz
           asset_content_type: application/gzip
           
