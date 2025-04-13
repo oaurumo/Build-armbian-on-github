@@ -317,22 +317,35 @@ jobs:
             BUILD_DESKTOP=no \
             EXPERT=yes \
             KERNEL_CONFIGURE=yes \
-            COMPRESS_OUTPUTIMAGE="sha" \
+            COMPRESS_OUTPUTIMAGE="sha,img.xz" \
             SHARE_LOG=yes
 
           cd output/images/
-          ls | tar -cvf images.tar -T -
-          xz -k -9 images.tar
+          timestamp=$(date +%Y%m%d%H%M%S)
+          ls | tar -cvf armbian_images_$timestamp.tar -T -         
 
           echo "status=success" >> $GITHUB_OUTPUT
 
       # 上传编译产物
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.2
+      #- name: Upload artifact
+      # uses: actions/upload-artifact@v4.6.2
+      # if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+      # with:
+      #   name: compile
+      #   path: ${{ github.workspace }}/build/output/images/*.tar
+      
+      #注意：以下部分需要补充 `create_release` 步骤
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
-          name: compile
-          path: ${{ github.workspace }}/build/output/images/*.xz
+          tag_name: ${{ inputs.set_release }}
+          path: ${{ github.workspace }}/build/output/images/*.tar
+          release_name: Release ${{ inputs.set_release }}
+          body: "Automated release for Armbian build."
+          draft: false
+          prerelease: false
 
       # 上传到 GitHub Releases
       # - name: Upload Release Asset
