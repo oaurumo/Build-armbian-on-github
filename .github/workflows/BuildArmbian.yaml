@@ -297,7 +297,6 @@ jobs:
           df -hT ${PWD}
           git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
           echo "status=success" >> $GITHUB_OUTPUT
 
       # 编译 Armbian
@@ -320,6 +319,11 @@ jobs:
             KERNEL_CONFIGURE=no \
             COMPRESS_OUTPUTIMAGE="sha" \
             SHARE_LOG=yes
+
+          cd output/images/
+          ls | tar -cvf images.tar -T -
+          xz -k -9 images.tar
+
           echo "status=success" >> $GITHUB_OUTPUT
 
       # 上传编译产物
@@ -328,19 +332,19 @@ jobs:
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
           name: compile
-          path: ${{ github.workspace }}/build/output/images/*.img
+          path: ${{ github.workspace }}/build/output/images/*.xz
 
       # 上传到 GitHub Releases
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/build/output/images/armbian.img
-          asset_name: armbian-${{ inputs.set_release }}.img
-          asset_content_type: application/octet-stream
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+      #   env:
+     #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       #  with:
+       #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+        #   asset_path: ${{ github.workspace }}/build/output/images/*.xz
+       #    asset_name: armbian-${{ inputs.set_release }}.img
+       #    asset_content_type: application/octet-stream
 
     # 注意：以下部分需要补充 `create_release` 步骤
     # - name: Create GitHub Release
