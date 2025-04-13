@@ -343,6 +343,7 @@ jobs:
         with:
           tag_name: ${{ inputs.set_release }}
           path: ${{ github.workspace }}/build/output/images/*.tar
+          token: ${{ secrets.GITHUB_TOKEN }}
           release_name: Release ${{ inputs.set_release }}
           body: "Automated release for Armbian build."
           draft: false
