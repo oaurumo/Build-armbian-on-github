@@ -309,14 +309,13 @@ jobs:
                            COMPRESS_OUTPUTIMAGE="sha" SHARE_LOG=yes
           echo "status=success" >> ${GITHUB_OUTPUT}
           
-      # 上传到 GitHub Releases
-   
-    - name: Upload
-      uses: actions/upload-artifact@v4.6.2
-      if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
-      with:
-        name: compile
-        path: ${{ github.workspace }}/build/output/images/*.img
+         # 上传到 GitHub Releases   
+        - name: Upload
+          uses: actions/upload-artifact@v4.6.2
+          if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
+            with:
+            name: compile
+            path: ${{ github.workspace }}/build/output/images/*.img
         
             ### Armbian Image information
             - Default username: root
