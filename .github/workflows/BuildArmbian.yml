@@ -310,14 +310,15 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
           
       # 上传到 GitHub Releases
-      - name: Upload Armbian image to Release
-        uses: ncipollo/release-action@main
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
         if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
         with:
-          tag: ${{ steps.compile.outputs.build_tag }}
-          artifacts: build/output/images/*
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          upload_url: ${{ build/output/images/* }}
+          asset_path: ./release/my_binary.tar.gz
+          asset_name: my_binary-${{ env.RELEASE_VERSION }}.tar.gz
+          asset_content_type: application/gzip
           
             ### Armbian Image information
             - Default username: root
