@@ -314,6 +314,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
         with:
+          tag: ${{ steps.compile.outputs.build_tag }}
           artifacts: build/output/images/*
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
