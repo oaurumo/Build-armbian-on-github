@@ -308,10 +308,12 @@ jobs:
           # 编译方法及参数说明: https://docs.armbian.com/Developer-Guide_Build-Options
           cd build/
           
+          # cd patch/misc/
           cd patch/misc/
-          wget http://kguba.cn/zip/wireless-rtl8723cs.tar
-          tar -xf wireless-rtl8723cs.tar
-          cd ../..          
+          wget http://kguba.cn/zip/wireless-rtl8723cs2.tar
+          tar -xf wireless-rtl8723cs2.tar
+          # cd ../..
+          cd ../..
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=rk3318-box \
