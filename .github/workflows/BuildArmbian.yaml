@@ -307,13 +307,14 @@ jobs:
         run: |
           # 编译方法及参数说明: https://docs.armbian.com/Developer-Guide_Build-Options
           cd build/
-          
+          mkdir -p userpatches
+          cd userpatches          
+          wget http://kguba.cn/txt/lib.config
+          wget http://kguba.cn/txt/linux-rockchip64-current.config
+          cd ..
           # cd patch/misc/
-          cd patch/misc/
-          wget http://kguba.cn/zip/wireless-rtl8723cs2.tar
-          tar -xf wireless-rtl8723cs2.tar
-          # cd ../..
-          cd ../..
+          # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
+          # cd ../..          
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=rk3318-box \
