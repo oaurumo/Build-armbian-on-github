@@ -311,6 +311,7 @@ jobs:
           cd userpatches          
           wget http://kguba.cn/txt/lib.config
           wget http://kguba.cn/txt/linux-rockchip64-current.config
+          chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
