@@ -328,6 +328,7 @@ jobs:
             KERNEL_CONFIGURE=no \
             COMPRESS_OUTPUTIMAGE="sha,img.xz" \
             KERNEL_GIT=shallow \
+            PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables wireless-regdb network-manager"
             SHARE_LOG=yes
 
           cd output/images/
