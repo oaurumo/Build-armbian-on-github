@@ -113,15 +113,23 @@ jobs:
             BUILD_DESKTOP=no \
             EXPERT=yes \
             KERNEL_CONFIGURE=no \
-            COMPRESS_OUTPUTIMAGE="sha,img.xz" \
+            COMPRESS_OUTPUTIMAGE="sha,img" \
             KERNEL_GIT=shallow \
             PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
             SHARE_LOG=yes
 
-          cd output/images/
-          timestamp=$(date +%Y%m%d%H%M%S)
-          ls | tar -cvf armbian_images_$timestamp.tar -T -         
-
+          cd output/images/          
+          xz -9 *.img
+          # timestamp=$(date +%Y%m%d%H%M%S)
+          txt_file=$(find . -maxdepth 1 -type f -name "*.txt" | head -n 1)
+          if [ -z "$txt_file" ]; then
+          echo "未找到任何打包文件。"
+          exit 1
+          fi
+          tar_name="${txt_file%.txt}"           
+          tar -cvf "${tar_name}.tar" *
+          echo "已成功打包img文件：${tar_name}.tar"
+          # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
 
       # 上传编译产物         
@@ -130,7 +138,7 @@ jobs:
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
           # name: compile
-          name: armbian_img
+          name: ${tar_name}
           path: ${{ github.workspace }}/build/output/images/*.tar
 
       # 上传到 GitHub Releases
