@@ -129,7 +129,8 @@ jobs:
         uses: actions/upload-artifact@v4.6.2
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
-          name: compile
+          # name: compile
+          name: armbian_img
           path: ${{ github.workspace }}/build/output/images/*.tar
 
       # 上传到 GitHub Releases
