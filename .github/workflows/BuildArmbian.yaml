@@ -93,7 +93,7 @@ jobs:
         run: |
           # 编译方法及参数说明: https://docs.armbian.com/Developer-Guide_Build-Options
           sudo timedatectl set-timezone Asia/Shanghai
-          sudo update-locale LANG=zh_CN.UTF-8
+          # sudo update-locale LANG=zh_CN.UTF-8
           sudo timedatectl set-ntp true
           timedatectl
           cd build/
