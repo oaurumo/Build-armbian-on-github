@@ -3,7 +3,7 @@
 # Copyright (C) 2021 https://github.com/oaurumo/
 #==========================================================================
 
-name: Build armbian
+name: Build armbian A
 
 on:
   repository_dispatch:
