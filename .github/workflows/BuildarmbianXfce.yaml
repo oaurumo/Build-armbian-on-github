@@ -107,16 +107,15 @@ jobs:
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..          
           ./compile.sh \
-            RELEASE=${{ inputs.set_release }} \
+            RELEASE=noble \
             BOARD=rk3318-box \
             BRANCH=current \
-            BUILD_MINIMAL=no \
-            BUILD_DESKTOP=yes \
+            BUILD_MINIMAL=no \            
             DESKTOP_ENVIRONMENT=xfce \
             DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \ 
             BUILD_ONLY=no \
             HOST=armbian \
-            BUILD_DESKTOP=no \
+            BUILD_DESKTOP=yes \
             EXPERT=yes \
             KERNEL_CONFIGURE=no \
             COMPRESS_OUTPUTIMAGE="sha,img" \
