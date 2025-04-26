@@ -93,7 +93,6 @@ jobs:
         run: |
           # 编译方法及参数说明: https://docs.armbian.com/Developer-Guide_Build-Options
           sudo timedatectl set-timezone Asia/Shanghai
-          # sudo update-locale LANG=zh_CN.UTF-8
           sudo timedatectl set-ntp true
           timedatectl
           cd build/
@@ -105,24 +104,8 @@ jobs:
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
-          # cd ../..          
-          ./compile.sh \
-            RELEASE=noble \
-            BOARD=rk3318-box \
-            BRANCH=current \
-            BUILD_MINIMAL=no \            
-            DESKTOP_ENVIRONMENT=xfce \
-            DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \ 
-            BUILD_ONLY=no \
-            HOST=armbian \
-            BUILD_DESKTOP=yes \
-            EXPERT=yes \
-            KERNEL_CONFIGURE=no \
-            COMPRESS_OUTPUTIMAGE="sha,img" \
-            KERNEL_GIT=shallow \
-            PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
-            SHARE_LOG=yes
-           
+          # cd ../.. 
+            ./compile.sh BOARD=rk3318-box BRANCH=current RELEASE=noble BUILD_MINIMAL=no PREFER_DOCKER=no BUILD_DESKTOP=yes  KERNEL_CONFIGURE=no DESKTOP_ENVIRONMENT=xfce DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base COMPRESS_OUTPUTIMAGE=sha,img  PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" KERNEL_GIT=shallow
           cd output/images/          
           sudo xz -9 *.img
           # timestamp=$(date +%Y%m%d%H%M%S)
