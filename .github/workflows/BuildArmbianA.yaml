@@ -99,16 +99,16 @@ jobs:
           cd build/
           mkdir -p userpatches
           cd userpatches          
-          wget http://kguba.cn/txt/armbianconfig/lib.config
-          wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
-          chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
+          # wget http://kguba.cn/txt/armbianconfig/lib.config
+          # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
+          # chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..          
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
-            BOARD=rk3318-box \
+            BOARD=aml-s9xx-box \
             BRANCH=current \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
