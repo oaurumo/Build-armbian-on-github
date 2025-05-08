@@ -108,7 +108,7 @@ jobs:
           # cd ../..          
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
-            BOARD=aml-s9xx-box \
+            BOARD=hinlink-h28k \
             BRANCH=current \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
