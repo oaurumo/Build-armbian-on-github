@@ -99,10 +99,12 @@ jobs:
           cd build/
           mkdir -p userpatches
           mkdir -p cache/sources/linux-kernel-worktree/6.1__rk35xx__arm64/drivers/rknpu
+          mkdir -p cache/sources/linux-kernel-worktree/5.10__rk35xx__arm64/drivers/rknpu
           mkdir -p config/kernel
           wget http://kguba.cn/txt/armbianconfig/rknpu.tar.xz
           tar -xf rknpu.tar.xz
           cp -R -f rknpu/* cache/sources/linux-kernel-worktree/6.1__rk35xx__arm64/drivers/rknpu
+          cp -R -f rknpu/* cache/sources/linux-kernel-worktree/5.10__rk35xx__arm64/drivers/rknpu
           wget http://kguba.cn/txt/armbianconfig/linux-rk35xx-next.config
           cp linux-rk35xx-next.config config/kernel
           cd userpatches          
