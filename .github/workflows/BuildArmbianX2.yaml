@@ -101,12 +101,18 @@ jobs:
           mkdir -p cache/sources/linux-kernel-worktree/6.1__rk35xx__arm64/drivers/rknpu
           mkdir -p cache/sources/linux-kernel-worktree/5.10__rk35xx__arm64/drivers/rknpu
           mkdir -p config/kernel
+          mkdir -p cache/sources/u-boot-worktree/u-boot/next-dev-v2024.10/drivers/rknpu
+          mkdir -p cache/sources/u-boot-worktree/u-boot-rockchip64/next-dev-v2024.10/drivers/rknpu
           wget http://kguba.cn/txt/armbianconfig/rknpu.tar.xz
           tar -xf rknpu.tar.xz
           cp -R -f rknpu/* cache/sources/linux-kernel-worktree/6.1__rk35xx__arm64/drivers/rknpu
           cp -R -f rknpu/* cache/sources/linux-kernel-worktree/5.10__rk35xx__arm64/drivers/rknpu
+          cp -R -f rknpu/* cache/sources/u-boot-worktree/u-boot/next-dev-v2024.10/drivers/rknpu
+          cp -R -f rknpu/* cache/sources/u-boot-worktree/u-boot-rockchip64/next-dev-v2024.10/drivers/rknpu
           wget http://kguba.cn/txt/armbianconfig/linux-rk35xx-next.config
+          wget http://kguba.cn/txt/armbianconfig/linux-rk35xx-vendor.config
           cp linux-rk35xx-next.config config/kernel
+          cp linux-rk35xx-vendor.config config/kernel
           cd userpatches          
           # wget http://kguba.cn/txt/armbianconfig/lib.config
           # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
@@ -114,11 +120,13 @@ jobs:
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
-          # cd ../..          
+          # cd ../..   
+          # KERNELBRANCH="tag:v6.1" \
+          # KERNEL_MAJOR_MINOR=6.1 \
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=panther-x2 \
-            BRANCH=next \
+            BRANCH=vendor \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
             HOST=armbian \
@@ -128,10 +136,8 @@ jobs:
             COMPRESS_OUTPUTIMAGE="sha,img" \
             KERNEL_GIT=shallow \
             PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
-            SHARE_LOG=yes \
-            KERNELBRANCH="tag:v6.1" \
-            KERNEL_GIT=shallow  \
-            KERNEL_MAJOR_MINOR=6.1 \
+            SHARE_LOG=yes \            
+            KERNEL_GIT=shallow  \            
             KERNEL_BTF=no
 
           cd output/images/          
