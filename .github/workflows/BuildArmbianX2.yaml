@@ -129,9 +129,9 @@ jobs:
             KERNEL_GIT=shallow \
             PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
             SHARE_LOG=yes \
-            KERNELBRANCH="tag:v5.10" \
+            KERNELBRANCH="tag:v6.1" \
             KERNEL_GIT=shallow  \
-            KERNEL_MAJOR_MINOR=5.10 \
+            KERNEL_MAJOR_MINOR=6.1 \
             KERNEL_BTF=no
 
           cd output/images/          
