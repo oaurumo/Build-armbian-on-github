@@ -14,11 +14,16 @@ on:
         required: false
         default: "jammy"
         type: choice
-        options:
-          - jammy
+        options:          
           - noble
+          - jammy
+          - Focal
+          - Bionic
+          - ---
           - bookworm
-          - bullseye 
+          - bullseye
+          - Buster
+          - Stretch
 env:
   TZ: America/New_York
   ROOTFS_SCRIPT: compile-kernel/tools/script/armbian_rootfs.sh
