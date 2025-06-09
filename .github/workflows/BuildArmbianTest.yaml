@@ -114,22 +114,9 @@ jobs:
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..          
-          ./compile.sh \
-            RELEASE=${{ inputs.set_release }} \
-            BOARD=odroidm1 \
-            BRANCH=current \
-            BUILD_MINIMAL=yes \
-            BUILD_ONLY=no \
-            HOST=armbian \
-            BUILD_DESKTOP=no \
-            EXPERT=yes \
-            KERNEL_CONFIGURE=no \
-            COMPRESS_OUTPUTIMAGE="sha,img" \
-            KERNEL_GIT=shallow \
-            PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
-            SHARE_LOG=yes
-
-          cd output/images/          
+          mkdir -p output/images         
+          cd output/images/ 
+           wget http://kguba.cn/txt/armbianconfig/Armbian_community_25.5.0-trunk.444_Aml-s9xx-box_noble_current_6.12.24.img
           sudo xz -9 *.img
           # timestamp=$(date +%Y%m%d%H%M%S)
           txt_file=$(find . -maxdepth 1 -type f -name "*.txt" | head -n 1)
