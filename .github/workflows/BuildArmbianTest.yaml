@@ -129,15 +129,16 @@ jobs:
           echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
-
-      # 上传编译产物         
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.2
+          
+      - name: Upload Armbian image to Release
+        uses: ncipollo/release-action@main
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         with:
-          # name: compile
-          name: armbian-images
-          path: ${{ github.workspace }}/build/output/images/*.tar
+          tag: armbian-images
+          artifacts: build/output/images/*
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
 
       # 上传到 GitHub Releases
       # - name: Upload Release Asset
