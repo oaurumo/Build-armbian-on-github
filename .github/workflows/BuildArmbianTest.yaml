@@ -132,13 +132,15 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           
       - name: Upload Armbian image to Release
-        uses: ncipollo/release-action@main
+        uses: actions/upload-release-asset@v1
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: armbian-images
           artifacts: build/output/images/*
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          
+          
           
 
       # 上传到 GitHub Releases
