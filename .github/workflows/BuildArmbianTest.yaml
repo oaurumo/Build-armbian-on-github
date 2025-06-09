@@ -118,6 +118,7 @@ jobs:
           cd output/images/ 
            wget http://kguba.cn/txt/armbianconfig/Armbian_community_25.5.0-trunk.444_Aml-s9xx-box_noble_current_6.12.24.img
           sudo xz -9 *.img
+          touch Armbian_community_25.5.0-trunk.444_Aml-s9xx-box_noble_current_6.12.24.txt
           # timestamp=$(date +%Y%m%d%H%M%S)
           txt_file=$(find . -maxdepth 1 -type f -name "*.txt" | head -n 1)
           if [ -z "$txt_file" ]; then
