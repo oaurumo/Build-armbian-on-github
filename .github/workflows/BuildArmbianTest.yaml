@@ -127,13 +127,13 @@ jobs:
           fi
           tar_name="${txt_file%.txt}"  
           # tar_name=$(echo "${txt_file%.txt}" | tr -d './' )
-          tar -cvf "${tar_name}.tar" *
-          TAR_FILE=$(ls -t *.tar | head -n 1)
-          TAR_FILE_BASENAME=$(basename "$TAR_FILE" .tar)
+          # tar -cvf "${tar_name}.tar" *
+          TAR_FILE=$(ls -t *.xz | head -n 1)
+          TAR_FILE_BASENAME=$(basename "$TAR_FILE" .xz)
           echo "已成功打包img文件：${tar_name}.tar"
-          rm -f *.img
-          rm -f *.xz
-          rm -f "$txt_file"
+          # rm -f *.img
+          # rm -f *.xz
+          # rm -f "$txt_file"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
           echo "TAR_FILE_BASENAME=${TAR_FILE_BASENAME}" >> $GITHUB_OUTPUT
