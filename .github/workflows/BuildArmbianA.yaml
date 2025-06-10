@@ -137,16 +137,16 @@ jobs:
           echo "未找到任何打包文件。"
           exit 1
           fi
-          tar_name="${txt_file%.txt}"           
+          # tar_name="${txt_file%.txt}"           
           # tar -cvf "${tar_name}.tar" *
           # TAR_FILE=$(ls -t *.tar | head -n 1)
           tag_img=$(ls -t *.xz | head -n 1)
           TAG_BASENAME=$(basename "$tag_img" .xz)
-          echo "已成功打包img文件：${tar_name}.tar"
+          # echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
           echo "TAG_BASENAME=${TAG_BASENAME}" >> $GITHUB_OUTPUT  # 供后续步骤使用
-          echo "tar_name=${tar_name}" >> $GITHUB_OUTPUT  # 供后续步骤使用
+          
           
       - name: Upload Armbian image to Release
         uses: ncipollo/release-action@main
