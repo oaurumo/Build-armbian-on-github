@@ -135,7 +135,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           tag: armbian-images
           artifacts: build/output/images/*
