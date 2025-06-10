@@ -1,6 +1,6 @@
 
 #==========================================================================
-# Description: Build Armbian
+# Description: Build-armbian-on-github
 # Copyright (C) 2021 https://github.com/oaurumo/
 #==========================================================================
 
@@ -152,26 +152,3 @@ jobs:
           # name: compile
           name: armbian-images
           path: ${{ github.workspace }}/build/output/images/*.tar
-
-      # 上传到 GitHub Releases
-      # - name: Upload Release Asset
-      #   uses: actions/upload-release-asset@v1
-      #   if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
-      #   env:
-     #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       #  with:
-       #    upload_url: ${{ steps.create_release.outputs.upload_url }}
-        #   asset_path: ${{ github.workspace }}/build/output/images/*.xz
-       #    asset_name: armbian-${{ inputs.set_release }}.img
-       #    asset_content_type: application/octet-stream
-
-    # 注意：以下部分需要补充 `create_release` 步骤
-    # - name: Create GitHub Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   with:
-    #     tag_name: ${{ inputs.set_release }}
-    #     release_name: Release ${{ inputs.set_release }}
-    #     body: "Automated release for Armbian build."
-    #     draft: false
-    #     prerelease: false
