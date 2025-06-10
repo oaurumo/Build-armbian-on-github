@@ -128,6 +128,9 @@ jobs:
           tar_name="${txt_file%.txt}"           
           tar -cvf "${tar_name}.tar" *
           echo "已成功打包img文件：${tar_name}.tar"
+          rm -f *.img
+          rm -f *.xz
+          rm -f "$txt_file"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
           echo "tar_name=${tar_name}" >> $GITHUB_OUTPUT
