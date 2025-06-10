@@ -116,7 +116,7 @@ jobs:
           # cd ../..          
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
-            BOARD=odroidm1 \
+            BOARD=rk3318-box \
             BRANCH=current \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
@@ -138,12 +138,14 @@ jobs:
           exit 1
           fi
           tar_name="${txt_file%.txt}"           
-          tar -cvf "${tar_name}.tar" *
-          TAR_FILE=$(ls -t *.tar | head -n 1)
+          # tar -cvf "${tar_name}.tar" *
+          # TAR_FILE=$(ls -t *.tar | head -n 1)
+          tag_img=$(ls -t *.xz | head -n 1)
+          TAG_BASENAME=$(basename "$tag_img" .xz)
           echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
-          echo "TAR_FILE=${TAR_FILE}" >> $GITHUB_OUTPUT  # 供后续步骤使用
+          echo "TAG_BASENAME=${TAG_BASENAME}" >> $GITHUB_OUTPUT  # 供后续步骤使用
           echo "tar_name=${tar_name}" >> $GITHUB_OUTPUT  # 供后续步骤使用
           
       - name: Upload Armbian image to Release
@@ -153,9 +155,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           # tag: armbian-img
-          artifacts: build/output/images/*.tar
+          artifacts: build/output/images/*
           skipIfReleaseExists: true          
-          tag:  ${{ steps.compile.outputs.tar_name }}
+          tag:  ${{ steps.compile.outputs.TAG_BASENAME }}
 
       # 上传编译产物         
       # - name: Upload artifact
