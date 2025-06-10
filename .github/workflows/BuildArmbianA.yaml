@@ -139,18 +139,32 @@ jobs:
           fi
           tar_name="${txt_file%.txt}"           
           tar -cvf "${tar_name}.tar" *
+          TAR_FILE=$(ls -t *.tar | head -n 1)
           echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
+          echo "TAR_FILE=${TAR_FILE}" >> $GITHUB_OUTPUT  # 供后续步骤使用
+          echo "tar_name=${tar_name}" >> $GITHUB_OUTPUT  # 供后续步骤使用
+          
+      - name: Upload Armbian image to Release
+        uses: ncipollo/release-action@main
+        if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        with:
+          # tag: armbian-img
+          artifacts: build/output/images/*.tar
+          skipIfReleaseExists: true          
+          tag:  ${{ steps.compile.outputs.tar_name }}
 
       # 上传编译产物         
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.2
-        if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
-        with:
-          # name: compile
-          name: armbian-images
-          path: ${{ github.workspace }}/build/output/images/*.tar
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4.6.2
+      #   if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+      #   with:
+      #     # name: compile
+      #     name: armbian-images
+      #     path: ${{ github.workspace }}/build/output/images/*.tar
 
       # 上传到 GitHub Releases
       # - name: Upload Release Asset
