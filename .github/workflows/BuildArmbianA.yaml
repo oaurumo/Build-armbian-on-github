@@ -107,9 +107,9 @@ jobs:
           # wget http://kguba.cn/txt/armbianconfig/lib.config
           # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
           # chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
-            wget http://kguba.cn/txt/armbianconfig/lib.config
-            wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
-            chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
+          #   wget http://kguba.cn/txt/armbianconfig/lib.config
+          #   wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
+          #   chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
@@ -129,8 +129,11 @@ jobs:
             PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
             SHARE_LOG=yes
 
-          cd output/images/          
-          sudo xz -9 *.img
+          cd output/images/   
+          tag_img=$(ls -t *.img | head -n 1)
+          TAG_BASENAME=$(basename "$tag_img" .img)
+          
+          sudo xz -9 *.img          
           # timestamp=$(date +%Y%m%d%H%M%S)
           txt_file=$(find . -maxdepth 1 -type f -name "*.txt" | head -n 1)
           if [ -z "$txt_file" ]; then
@@ -139,9 +142,7 @@ jobs:
           fi
           # tar_name="${txt_file%.txt}"           
           # tar -cvf "${tar_name}.tar" *
-          # TAR_FILE=$(ls -t *.tar | head -n 1)
-          tag_img=$(ls -t *.xz | head -n 1)
-          TAG_BASENAME=$(basename "$tag_img" .xz)
+          # TAR_FILE=$(ls -t *.tar | head -n 1)          
           # echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
