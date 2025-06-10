@@ -146,7 +146,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           # tag: armbian-img
-          artifacts: build/output/images/*.tar
+          artifacts: build/output/images/*
           skipIfReleaseExists: true          
           tag:  ${{ steps.compile.outputs.TAR_FILE_BASENAME }}
           
