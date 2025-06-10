@@ -125,18 +125,18 @@ jobs:
           echo "未找到任何打包文件。"
           exit 1
           fi
-          # tar_name="${txt_file%.txt}"  
+          tar_name="${txt_file%.txt}"  
           # tar_name=$(echo "${txt_file%.txt}" | tr -d './' )
-          tar_name=$(echo "${txt_file%.txt}" | sed 's/^$.\{0,2\}$/\1/' | sed 's/^[./]//;s/^[./]//')
           tar -cvf "${tar_name}.tar" *
           TAR_FILE=$(ls -t *.tar | head -n 1)
+          TAR_FILE_BASENAME=$(basename "$TAR_FILE" .tar)
           echo "已成功打包img文件：${tar_name}.tar"
           rm -f *.img
           rm -f *.xz
           rm -f "$txt_file"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
-          echo "tar_name=${tar_name}" >> $GITHUB_OUTPUT
+          echo "TAR_FILE_BASENAME=${TAR_FILE_BASENAME}" >> $GITHUB_OUTPUT
           echo "TAR_FILE=${TAR_FILE}" >> $GITHUB_OUTPUT  # 供后续步骤使用
           
       - name: Upload Armbian image to Release
@@ -148,7 +148,7 @@ jobs:
           # tag: armbian-img
           artifacts: build/output/images/*.tar
           skipIfReleaseExists: true          
-          tag:  ${{ steps.compile.outputs.tar_name }}
+          tag:  ${{ steps.compile.outputs.TAR_FILE_BASENAME }}
           
 
       # 上传到 GitHub Releases
