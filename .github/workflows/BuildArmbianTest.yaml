@@ -126,7 +126,7 @@ jobs:
           exit 1
           fi
           # tar_name="${txt_file%.txt}"  
-          tar_name=$(echo "${txt_file%.txt}" | tr './' '' | tr ' ' '')
+          tar_name=$(echo "${txt_file%.txt}" | tr './Armbian' 'Armbian' )
           tar -cvf "${tar_name}.tar" *
           TAR_FILE=$(ls -t *.tar | head -n 1)
           echo "已成功打包img文件：${tar_name}.tar"
