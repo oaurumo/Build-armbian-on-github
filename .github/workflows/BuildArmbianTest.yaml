@@ -139,6 +139,7 @@ jobs:
         with:
           tag: armbian-images
           artifacts: build/output/images/*
+          skipIfReleaseExists: true
           
           
           
