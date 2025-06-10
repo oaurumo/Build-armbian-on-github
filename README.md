@@ -5,7 +5,6 @@
 #==========================================================================
 
 name: Build armbian A
-
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -104,20 +103,13 @@ jobs:
           timedatectl
           cd build/
           mkdir -p userpatches
-          cd userpatches          
-          # wget http://kguba.cn/txt/armbianconfig/lib.config
-          # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
-          # chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
-            wget http://kguba.cn/txt/armbianconfig/lib.config
-            wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
-            chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
+          cd userpatches                 
           cd ..
           # cd patch/misc/
-          # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..          
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
-            BOARD=odroidm1 \
+            BOARD=rk3318-box \
             BRANCH=current \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
@@ -130,25 +122,42 @@ jobs:
             PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" \
             SHARE_LOG=yes
 
-          cd output/images/          
-          sudo xz -9 *.img
+          cd output/images/   
+          tag_img=$(ls -t *.img | head -n 1)
+          TAG_BASENAME=$(basename "$tag_img" .img)
+          
+          sudo xz -9 *.img          
           # timestamp=$(date +%Y%m%d%H%M%S)
           txt_file=$(find . -maxdepth 1 -type f -name "*.txt" | head -n 1)
           if [ -z "$txt_file" ]; then
           echo "未找到任何打包文件。"
           exit 1
           fi
-          tar_name="${txt_file%.txt}"           
-          tar -cvf "${tar_name}.tar" *
-          echo "已成功打包img文件：${tar_name}.tar"
+          # tar_name="${txt_file%.txt}"           
+          # tar -cvf "${tar_name}.tar" *
+          # TAR_FILE=$(ls -t *.tar | head -n 1)          
+          # echo "已成功打包img文件：${tar_name}.tar"
           # ls | tar -cvf armbian_images_$timestamp.tar -T -   
           echo "status=success" >> $GITHUB_OUTPUT
+          echo "TAG_BASENAME=${TAG_BASENAME}" >> $GITHUB_OUTPUT  # 供后续步骤使用
+          
+          
+      - name: Upload Armbian image to Release
+        uses: ncipollo/release-action@main
+        if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        with:
+          # tag: armbian-img
+          artifacts: build/output/images/*
+          skipIfReleaseExists: true          
+          tag:  ${{ steps.compile.outputs.TAG_BASENAME }}
 
       # 上传编译产物         
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.2
-        if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
-        with:
-          # name: compile
-          name: armbian-images
-          path: ${{ github.workspace }}/build/output/images/*.tar
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4.6.2
+      #   if: ${{ steps.compile.outputs.status == 'success' && !cancelled() }}
+      #   with:
+      #     # name: compile
+      #     name: armbian-images
+      #     path: ${{ github.workspace }}/build/output/images/*.tar
