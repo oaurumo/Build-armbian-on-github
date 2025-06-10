@@ -86,7 +86,7 @@ jobs:
         if: ${{ steps.init.outputs.status == 'success' && !cancelled() }}
         run: |
           df -hT ${PWD}
-          git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
+          mkdir -p build          
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
           echo "status=success" >> $GITHUB_OUTPUT
 
