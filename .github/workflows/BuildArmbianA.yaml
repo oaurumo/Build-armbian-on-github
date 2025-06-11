@@ -17,13 +17,13 @@ on:
         options:          
           - noble
           - jammy
-          - Focal
-          - Bionic
+          - focal
+          - bionic
           - ---
           - bookworm
           - bullseye
-          - Buster
-          - Stretch
+          - buster
+          - stretch
 env:
   TZ: America/New_York
   ROOTFS_SCRIPT: compile-kernel/tools/script/armbian_rootfs.sh
