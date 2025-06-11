@@ -117,7 +117,8 @@ jobs:
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=rk3318-box \
-            BRANCH=current \
+            # BRANCH=current \
+            BRANCH=legacy \
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
             HOST=armbian \
