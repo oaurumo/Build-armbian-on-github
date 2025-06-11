@@ -114,11 +114,11 @@ jobs:
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..      
-          # BRANCH=legacy current vendor edge collabora
+          # BRANCH=legacy current vendor edge collabora midstream
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=rk3318-box \
-            BRANCH=vendor \            
+            BRANCH=current \            
             BUILD_MINIMAL=yes \
             BUILD_ONLY=no \
             HOST=armbian \
