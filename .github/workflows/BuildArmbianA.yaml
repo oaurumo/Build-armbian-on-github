@@ -114,7 +114,7 @@ jobs:
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..      
-          # BRANCH=legacy current vendor
+          # BRANCH=legacy current vendor edge
           ./compile.sh \
             RELEASE=${{ inputs.set_release }} \
             BOARD=rk3318-box \
