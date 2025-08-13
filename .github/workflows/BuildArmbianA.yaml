@@ -115,7 +115,9 @@ jobs:
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..      
           # BRANCH=legacy current vendor edge collabora midstream
-          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
+          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"
+          # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
+
           cd output/images/   
           tag_img=$(ls -t *.img | head -n 1)
           TAG_BASENAME=$(basename "$tag_img" .img)
