@@ -20,6 +20,7 @@ on:
           - focal
           - bionic
           - ---
+          - trixie
           - bookworm
           - bullseye
           - buster
