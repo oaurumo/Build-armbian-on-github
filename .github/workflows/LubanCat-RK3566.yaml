@@ -87,7 +87,8 @@ jobs:
         if: ${{ steps.init.outputs.status == 'success' && !cancelled() }}
         run: |
           df -hT ${PWD}
-          git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
+          git clone https://github.com/lz00qs/LubanCatRK3566ArmbianBuild.git
+          cp LubanCatRK3566ArmbianBuild build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
           echo "status=success" >> $GITHUB_OUTPUT
 
@@ -103,8 +104,7 @@ jobs:
           sudo timedatectl set-ntp true
           timedatectl
           cd build/
-          git clone https://github.com/lz00qs/LubanCatRK3566ArmbianBuild.git
-          cd build/LubanCatRK3566ArmbianBuild/
+          
           mkdir -p userpatches
           cd userpatches          
           # wget http://kguba.cn/txt/armbianconfig/lib.config
@@ -150,7 +150,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           # tag: armbian-img
-          artifacts: build/LubanCatRK3566ArmbianBuild/output/images/*
+          artifacts: build/output/images/*
           skipIfReleaseExists: true          
           tag:  ${{ steps.compile.outputs.TAG_BASENAME }}
 
