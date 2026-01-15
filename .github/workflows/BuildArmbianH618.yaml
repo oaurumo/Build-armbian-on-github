@@ -3,7 +3,7 @@
 # Copyright (C) 2021 https://github.com/oaurumo/
 #==========================================================================
 
-name: Build armbian Test2
+name: Build armbian h618
 
 on:
   repository_dispatch:
