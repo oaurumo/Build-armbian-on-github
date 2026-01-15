@@ -45,7 +45,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          docker rmi $(docker images -q) 2>/dev/null
+          # docker rmi $(docker images -q) 2>/dev/null
+          docker image prune -af 2>/dev/null || true
           [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
           sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
           sudo swapoff -a
@@ -102,6 +103,7 @@ jobs:
           # sudo update-locale LANG=zh_CN.UTF-8
           sudo timedatectl set-ntp true
           timedatectl
+          apt update
           cd build/
           chmod +x compile.sh
           mkdir -p userpatches
