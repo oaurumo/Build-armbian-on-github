@@ -92,7 +92,7 @@ jobs:
         if: ${{ steps.down.outputs.status == 'success' && !cancelled() }}
         run: |
           # 编译方法及参数说明: https://docs.armbian.com/Developer-Guide_Build-Options
-          sudo timedatectl set-timezone Asia/Shanghai
+          # sudo timedatectl set-timezone Asia/Shanghai
           sudo timedatectl set-ntp true
           timedatectl
           cd build/
