@@ -108,7 +108,8 @@ jobs:
           cd build/
           mkdir -p userpatches
           cd userpatches
-          echo "KERNELBRANCH='tag:v5.15.16'" > lib.config
+          # echo "KERNELBRANCH='tag:v5.15.16'" > lib.config
+          echo "KERNEL_GIT_BRANCH='linux-5.15.16'" > lib.config
           # Add: KERNELBRANCH='tag:v4.14.52' to build/userpatches/lib.config
           # wget http://kguba.cn/txt/armbianconfig/lib.config
           # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
