@@ -106,7 +106,9 @@ jobs:
           timedatectl
           cd build/
           mkdir -p userpatches
-          cd userpatches          
+          cd userpatches
+          echo "KERNELBRANCH='tag:v5.15.16'" > lib.config
+          # Add: KERNELBRANCH='tag:v4.14.52' to build/userpatches/lib.config
           # wget http://kguba.cn/txt/armbianconfig/lib.config
           # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
           # chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
@@ -118,10 +120,10 @@ jobs:
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..      
           # BRANCH=legacy current vendor edge collabora midstream 
-          # --kernel 5.15.16  EXPERT=yes启用交互
+          # --kernel 5.15.16  EXPERT=yes启用交互  BRANCH=current KERNEL_GIT=shallow  KERNEL_GIT_BRANCH=linux-5.15.16
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=aml-s9xx-box BRANCH=current BUILD_MINIMAL=no  BUILD_DESKTOP=yes  KERNEL_CONFIGURE=no DESKTOP_ENVIRONMENT=xfce DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base COMPRESS_OUTPUTIMAGE=sha,img.xz
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny iptables network-manager"  
-          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current --kernel 5.15.16 BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
+          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box KERNEL_GIT_BRANCH=linux-5.15.16 BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=bananapim4zero BRANCH=edge BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=jp-tvbox-3566 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
