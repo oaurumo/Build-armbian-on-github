@@ -120,11 +120,11 @@ jobs:
           # cd ../..      
           # BRANCH=legacy current vendor edge collabora midstream 
           # h618soc vontar-h618 x98h bananapim4zero
-          # BRANCH=5.15  KERNEL_GIT=shallow
+          # BRANCH=5.15  KERNEL_GIT=shallow SKIP_DIALOG=yes
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=aml-s9xx-box BRANCH=current BUILD_MINIMAL=no  BUILD_DESKTOP=yes  KERNEL_CONFIGURE=no DESKTOP_ENVIRONMENT=xfce DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base COMPRESS_OUTPUTIMAGE=sha,img.xz
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny iptables network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
-            ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box KERNEL_GIT_BRANCH=linux-5.15 NONINTERACTIVE=yes BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
+            ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box KERNEL_GIT_BRANCH=linux-5.15 SKIP_DIALOG=yes NONINTERACTIVE=yes BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=jp-tvbox-3566 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           cd output/images/   
