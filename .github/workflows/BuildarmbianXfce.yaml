@@ -104,21 +104,8 @@ jobs:
           cd ..
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
-          # cd ../.. 
-            ./compile.sh \
-            BOARD=rk3318-box \
-            BRANCH=current \
-            RELEASE=noble \
-            BUILD_MINIMAL=no \
-            PREFER_DOCKER=no \
-            BUILD_DESKTOP=yes \
-            KERNEL_CONFIGURE=no \
-            DESKTOP_ENVIRONMENT=xfce \
-            DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \
-            COMPRESS_OUTPUTIMAGE=sha,img \
-            DESKTOP_SOFTWARE="browsers,editors,office,multimedia,desktop_tools,internet,programming,remote_desktop" \
-            KERNEL_GIT=shallow \
-            KERNEL_BTF=no
+          # cd ../..            
+            ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny iptables network-manager"  
           cd output/images/          
           sudo xz -9 *.img
           # timestamp=$(date +%Y%m%d%H%M%S)
