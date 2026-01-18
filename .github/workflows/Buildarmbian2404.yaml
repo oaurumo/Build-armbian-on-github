@@ -123,7 +123,7 @@ jobs:
           #   wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
           #   chmod 777 lib.config && chmod 777 linux-rockchip64-current.config
           cd ..
-          chmod 777 compile.sh
+          chmod +x compile.sh
           # cd patch/misc/
           # wget http://kguba.cn/zip/wireless-rtl8723cs2.tar  tar -xf wireless-rtl8723cs2.tar
           # cd ../..      
