@@ -111,9 +111,9 @@ jobs:
           mkdir -p userpatches
           cd userpatches
           # echo "KERNELBRANCH='tag:v5.15.16'" > lib.config
-          echo "source "${BASH_SOURCE%/*}/include/rockchip64_common.inc"" > rockchip64.conf
-          echo "prepare_boot_configuration" > rockchip64.conf    
-          echo "KERNEL_GIT_BRANCH='linux-5.15.y'" > lib.config
+          # echo "source "${BASH_SOURCE%/*}/include/rockchip64_common.inc"" > rockchip64.conf
+          # echo "prepare_boot_configuration" > rockchip64.conf    
+          # echo "KERNEL_GIT_BRANCH='linux-5.15.y'" > lib.config
           # Add: KERNELBRANCH='tag:v4.14.52' to build/userpatches/lib.config
           # wget http://kguba.cn/txt/armbianconfig/lib.config
           # wget http://kguba.cn/txt/armbianconfig/linux-rockchip64-current.config
@@ -129,10 +129,13 @@ jobs:
           # --kernel 5.15.16  EXPERT=yes启用交互  BRANCH=current KERNEL_GIT=shallow  KERNEL_GIT_BRANCH=linux-5.15.16 ARMBIAN_BUILD_NONINTERACTIVE=yes
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=aml-s9xx-box BRANCH=current BUILD_MINIMAL=no  BUILD_DESKTOP=yes  KERNEL_CONFIGURE=no DESKTOP_ENVIRONMENT=xfce DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base COMPRESS_OUTPUTIMAGE=sha,img.xz
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny iptables network-manager"  
-          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=rk3318-box BRANCH=current KERNEL_GIT_BRANCH=linux-5.15.y ARMBIAN_BUILD_NONINTERACTIVE=yes BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
+          ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=jp-tvbox-3566 BRANCH=current KERNEL_BTF=no ARMBIAN_BUILD_NONINTERACTIVE=yes BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=bananapim4zero BRANCH=edge BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=jp-tvbox-3566 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
+          tar -cpf build.tar  action.yml config extensions LICENSE packages requirements.txt userpatches cache CONTRIBUTING.md patch shell.nix VERSION compile.sh CREDITS.md lib output README.md tools
+          xz -k -9 build.tar
+          mv build.tar output/images/
           cd output/images/   
           tag_img=$(ls -t *.img | head -n 1)
           TAG_BASENAME=$(basename "$tag_img" .img)
