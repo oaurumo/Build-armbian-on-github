@@ -135,7 +135,7 @@ jobs:
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=bananapim4zero BRANCH=edge BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager"  
           # ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=jp-tvbox-3566 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no  HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow SHARE_LOG=yes PACKAGE_LIST_BOARD="vim-tiny network-manager"  
-            ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=legacy BUILD_MINIMAL=yes BUILD_ONLY=no HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no  COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" SHARE_LOG=yes
+            ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=panther-x2 BRANCH=current BUILD_MINIMAL=yes BUILD_ONLY=no HOST=armbian BUILD_DESKTOP=no EXPERT=no KERNEL_CONFIGURE=no  COMPRESS_OUTPUTIMAGE="sha,img" KERNEL_GIT=shallow PACKAGE_LIST_BOARD="vim-tiny hostapd bridge-utils ifupdown iptables network-manager" SHARE_LOG=yes
           cd output/images/   
           tag_img=$(ls -t *.img | head -n 1)
           TAG_BASENAME=$(basename "$tag_img" .img)
